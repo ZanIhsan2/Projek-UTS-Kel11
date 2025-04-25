@@ -1,0 +1,168 @@
+<?php
+
+require_once './Layouts/top.php';
+require_once './Layouts/navbar.php';
+require_once './Layouts/sidebar.php';
+
+?>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+              <h1>Dashboard</h1>
+            <style>
+  body {
+    background-image: url('dist/img/parkir.jpg'); /* Ganti path sesuai lokasi gambarmu */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    image-rendering: auto; /* pastikan tidak blur */
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0,0,0); /* trick rendering lebih tajam */
+  }
+
+  .content-wrapper {
+    background-color: rgba(71, 109, 10, 0); /* Biar isi tetap terbaca */
+    padding: 20px;
+    border-radius: 10px;
+  }
+</style>
+
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Blank</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+      <!-- /.card -->
+<!-- Kotak dashboard di bawah blank page -->
+<div class="row mt-3">
+  <!-- Kotak 1: Jumlah Kendaraan -->
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-primary">
+      <div class="inner">
+        <h3>0</h3>
+        <p>Data Kendaraan</p>
+      </div>
+      <div class="icon">
+        <i class="fas fa-car"></i>
+      </div>
+      <a href="data_kendaraan.php" class="small-box-footer">
+        Lihat <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Kotak 2: Jumlah Paramedik -->
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-success">
+      <div class="inner">
+        <h3>0</h3>
+        <p>Tambah Kendaraan</p>
+      </div>
+      <div class="icon">
+        <i class="nnav-icon fas fa-plus-circle"></i>
+      </div>
+      <a href="data_paramedik.php" class="small-box-footer">
+        Lihat <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Kotak 3: Jumlah Pasien -->
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-warning">
+      <div class="inner">
+        <h3>0</h3>
+        <p>Jenis Kendaraan</p>
+      </div>
+      <div class="icon">
+        <i class="nav-icon fas fa-th-list"></i>
+      </div>
+      <a href="Jenis_Kendaraan.php" class="small-box-footer">
+        Lihat <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Kotak 4: Jumlah Pemeriksaan -->
+  <div class="col-lg-3 col-6">
+    <div class="small-box bg-purple">
+      <div class="inner">
+        <h3>0</h3>
+        <p>Area Parkir</p>
+      </div>
+      <div class="icon">
+        <i class="nav-icon fas fa-map-marker-alt"></i>
+      </div>
+      <a href="Area_Parkir.php" class="small-box-footer">
+        Lihat <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- Baris 2 -->
+<div class="row mt-3">
+  <!-- Kotak 5: Jumlah Pegawai -->
+  <div class="col-lg-3 col-6">
+    <div class="small-box" style="background-color: #17a2b8; color: white;">
+      <div class="inner">
+        <h3>0</h3>
+        <p>Tambah Area Parkir</p>
+      </div>
+      <div class="icon">
+        <i class="nav-icon fas fa-plus-square"></i>
+      </div>
+      <a href="Tambah_Area.php" class="small-box-footer text-white">
+        Lihat <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Kotak 6: Jumlah Kampus -->
+  <div class="col-lg-3 col-6">
+    <div class="small-box" style="background-color:rgb(85, 110, 133); color: white;">
+      <div class="inner">
+        <h3>0</h3>
+        <p>Transaksi Parkir</p>
+      </div>
+      <div class="icon">
+        <i class="nav-icon fas fa-exchange-alt"></i>
+      </div>
+      <a href="Trasaksi_Parkir.php" class="small-box-footer text-white">
+        Lihat <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Kotak 7: Area Parkir -->
+  <div class="col-lg-3 col-6">
+    <div class="small-box" style="background-color:rgb(130, 142, 155); color: white;">
+      <div class="inner">
+        <h3>0</h3>
+        <p>Data Kampus</p>
+      </div>
+      <div class="icon">
+        <i class="nav-icon fas fa-university"></i>
+      </div>
+      <a href="Data_kampus.php" class="small-box-footer text-white">
+        Lihat <i class="fas fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+    </section>
+    <!-- /.content -->
+</div>
+  <!-- /.content-wrapper -->
+<?php
+require_once './Layouts/bottom.php';
+?>
