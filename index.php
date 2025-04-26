@@ -62,7 +62,7 @@ require_once './Layouts/sidebar.php';
     </div>
   </div>
 
-  <!-- Kotak 2: Jumlah Paramedik -->
+  <!-- Kotak 2: Jumlah Tambah Kendaraan -->
   <div class="col-lg-3 col-6">
     <div class="small-box bg-success">
       <div class="inner">
@@ -78,7 +78,7 @@ require_once './Layouts/sidebar.php';
     </div>
   </div>
 
-  <!-- Kotak 3: Jumlah Pasien -->
+  <!-- Kotak 3: Jumlah Jenis Kendaraan -->
   <div class="col-lg-3 col-6">
     <div class="small-box bg-warning">
       <div class="inner">
@@ -94,7 +94,7 @@ require_once './Layouts/sidebar.php';
     </div>
   </div>
 
-  <!-- Kotak 4: Jumlah Pemeriksaan -->
+  <!-- Kotak 4: Jumlah Area Parkir -->
   <div class="col-lg-3 col-6">
     <div class="small-box bg-purple">
       <div class="inner">
@@ -112,7 +112,7 @@ require_once './Layouts/sidebar.php';
 </div>
 <!-- Baris 2 -->
 <div class="row mt-3">
-  <!-- Kotak 5: Jumlah Pegawai -->
+  <!-- Kotak 5: Jumlah Tambah Area Parkir -->
   <div class="col-lg-3 col-6">
     <div class="small-box" style="background-color: #17a2b8; color: white;">
       <div class="inner">
@@ -128,7 +128,7 @@ require_once './Layouts/sidebar.php';
     </div>
   </div>
 
-  <!-- Kotak 6: Jumlah Kampus -->
+  <!-- Kotak 6: Jumlah Transaksi Kampus -->
   <div class="col-lg-3 col-6">
     <div class="small-box" style="background-color:rgb(85, 110, 133); color: white;">
       <div class="inner">
@@ -144,7 +144,7 @@ require_once './Layouts/sidebar.php';
     </div>
   </div>
 
-  <!-- Kotak 7: Area Parkir -->
+  <!-- Kotak 7: Data Kampus -->
   <div class="col-lg-3 col-6">
     <div class="small-box" style="background-color:rgb(130, 142, 155); color: white;">
       <div class="inner">
