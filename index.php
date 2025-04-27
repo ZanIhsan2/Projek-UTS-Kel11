@@ -1,9 +1,18 @@
 <?php
 
+// Koneksi Database
+include "./config/dbkoneksi.php";
+
 require_once './Layouts/top.php';
 require_once './Layouts/navbar.php';
 require_once './Layouts/sidebar.php';
 
+// Ambil data total statistik untuk menampilkan jumlah
+$jmlh_transaksi = $dbh->query("SELECT COUNT(*) FROM transaksi")-> fetchColumn();
+$jmlh_kampus = $dbh->query("SELECT COUNT(*) FROM kampus")-> fetchColumn();
+$jmlh_parkir = $dbh->query("SELECT COUNT(*) FROM area_parkir")-> fetchColumn();
+$jmlh_kendaraan = $dbh->query("SELECT COUNT(*) FROM kendaraan")-> fetchColumn();
+$jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -50,7 +59,7 @@ require_once './Layouts/sidebar.php';
   <div class="col-lg-3 col-6">
     <div class="small-box bg-primary">
       <div class="inner">
-        <h3>0</h3>
+        <h3><?= $jmlh_kendaraan ?></h3>
         <p>Data Kendaraan</p>
       </div>
       <div class="icon">
@@ -62,27 +71,11 @@ require_once './Layouts/sidebar.php';
     </div>
   </div>
 
-  <!-- Kotak 2: Jumlah Tambah Kendaraan -->
-  <div class="col-lg-3 col-6">
-    <div class="small-box bg-success">
-      <div class="inner">
-        <h3>0</h3>
-        <p>Tambah Kendaraan</p>
-      </div>
-      <div class="icon">
-        <i class="nnav-icon fas fa-plus-circle"></i>
-      </div>
-      <a href="data_paramedik.php" class="small-box-footer">
-        Lihat <i class="fas fa-arrow-circle-right"></i>
-      </a>
-    </div>
-  </div>
-
-  <!-- Kotak 3: Jumlah Jenis Kendaraan -->
+  <!-- Kotak 2: Jumlah Jenis Kendaraan -->
   <div class="col-lg-3 col-6">
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3>0</h3>
+        <h3><?= $jmlh_jenis ?></h3>
         <p>Jenis Kendaraan</p>
       </div>
       <div class="icon">
@@ -98,7 +91,7 @@ require_once './Layouts/sidebar.php';
   <div class="col-lg-3 col-6">
     <div class="small-box bg-purple">
       <div class="inner">
-        <h3>0</h3>
+        <h3><?= $jmlh_parkir ?></h3>
         <p>Area Parkir</p>
       </div>
       <div class="icon">
@@ -110,29 +103,11 @@ require_once './Layouts/sidebar.php';
     </div>
   </div>
 </div>
-<!-- Baris 2 -->
-<div class="row mt-3">
-  <!-- Kotak 5: Jumlah Tambah Area Parkir -->
-  <div class="col-lg-3 col-6">
-    <div class="small-box" style="background-color: #17a2b8; color: white;">
-      <div class="inner">
-        <h3>0</h3>
-        <p>Tambah Area Parkir</p>
-      </div>
-      <div class="icon">
-        <i class="nav-icon fas fa-plus-square"></i>
-      </div>
-      <a href="Tambah_Area.php" class="small-box-footer text-white">
-        Lihat <i class="fas fa-arrow-circle-right"></i>
-      </a>
-    </div>
-  </div>
-
-  <!-- Kotak 6: Jumlah Transaksi Kampus -->
+  <!-- Kotak 5: Jumlah Transaksi Kampus -->
   <div class="col-lg-3 col-6">
     <div class="small-box" style="background-color:rgb(85, 110, 133); color: white;">
       <div class="inner">
-        <h3>0</h3>
+        <h3><?= $jmlh_transaksi ?></h3>
         <p>Transaksi Parkir</p>
       </div>
       <div class="icon">
@@ -148,7 +123,7 @@ require_once './Layouts/sidebar.php';
   <div class="col-lg-3 col-6">
     <div class="small-box" style="background-color:rgb(130, 142, 155); color: white;">
       <div class="inner">
-        <h3>0</h3>
+        <h3><?= $jmlh_kampus ?></h3>
         <p>Data Kampus</p>
       </div>
       <div class="icon">

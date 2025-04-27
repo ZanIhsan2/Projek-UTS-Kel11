@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([$tanggal, $jam_masuk, $kendaraan_id, $area_parkir_id]);
 
     $_SESSION['notif'] = "Kendaraan berhasil masuk!";
-    header("Location: masuk_kendaraan.php");
+    header("Location: list.php");
     exit();
 }
 ?>
