@@ -7,8 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST'){
     if (trim($email) == '' ||trim($password) ==''){
         echo "input form harus diisi ";
     } else {
-        if ($email == 'admin@gmail.com' && $password =='admin123') {
-            header('location: ./index.php');
+        if ($email == 'admin' && $password =='admin123') {
+            header('location: ../index.html');
         } else {
             echo 'email atau password salah';
         }
@@ -31,20 +31,25 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST'){
   <link rel="stylesheet" href="./dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+
+  <!-- Tambahkan ini di <head> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="./index.php"><b>Admin</b>LTE</a>
+    <a href="./index.php"><b>Parkir Kampus</b><br>STT Nurul Fikri</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Login untuk akses Parkir</p>
 
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email" placeholder="Email">
+          <input type="text" class="form-control" name="email" placeholder="Username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -64,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST'){
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
               <label for="remember">
-                Remember Me
+                Ingat Saya
               </label>
             </div>
           </div>
