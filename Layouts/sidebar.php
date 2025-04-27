@@ -59,7 +59,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./Area_Parkir.php" class="nav-link">
+            <a href="../Pages/Transaksi/list.php" class="nav-link">
               <i class="nav-icon fas fa-exchange-alt"></i>
               <p>
                  Transaksi Parkir

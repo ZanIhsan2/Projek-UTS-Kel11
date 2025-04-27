@@ -138,7 +138,7 @@ require_once './Layouts/sidebar.php';
       <div class="icon">
         <i class="nav-icon fas fa-exchange-alt"></i>
       </div>
-      <a href="Trasaksi_Parkir.php" class="small-box-footer text-white">
+      <a href="./Pages/Transaksi/list.php" class="small-box-footer text-white">
         Lihat <i class="fas fa-arrow-circle-right"></i>
       </a>
     </div>
