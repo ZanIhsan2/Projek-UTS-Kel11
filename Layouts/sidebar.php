@@ -59,7 +59,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="../Pages/Transaksi/list.php" class="nav-link">
+            <a href="Pages/Transaksi/list.php" class="nav-link">
               <i class="nav-icon fas fa-exchange-alt"></i>
               <p>
                  Transaksi Parkir
@@ -75,10 +75,10 @@
             </a>
           </li>           
           <li class="nav-item">
-            <a href="./Data_kampus.php" class="nav-link">
+            <a href="Pages/Kampus/list.php" class="nav-link">
               <i class="nav-icon fas fa-university"></i>
               <p>
-                 Data Kampus
+                 Data Kampus                                                      
               </p>
             </a>
           </li>         

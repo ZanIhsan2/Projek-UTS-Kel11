@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST'){
     <div class="card-body login-card-body">
       <p class="login-box-msg">Login untuk akses Parkir</p>
 
-      <form action="" method="post">
+      <form action="../index.php" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="email" placeholder="Username">
           <div class="input-group-append">

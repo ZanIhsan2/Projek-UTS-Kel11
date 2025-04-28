@@ -23,7 +23,7 @@ $jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
         <div class="row mb-2">
           <div class="col-sm-6">
               <h1>Dashboard</h1>
-            <style>
+<style>
   body {
     background-image: url('dist/img/parkir.jpg'); /* Ganti path sesuai lokasi gambarmu */
     background-size: cover;
@@ -87,7 +87,7 @@ $jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
     </div>
   </div>
 
-  <!-- Kotak 4: Jumlah Area Parkir -->
+  <!-- Kotak 3: Jumlah Area Parkir -->
   <div class="col-lg-3 col-6">
     <div class="small-box bg-purple">
       <div class="inner">
@@ -103,7 +103,7 @@ $jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
     </div>
   </div>
 </div>
-  <!-- Kotak 5: Jumlah Transaksi Kampus -->
+  <!-- Kotak 4: Jumlah Transaksi Kampus -->
   <div class="col-lg-3 col-6">
     <div class="small-box" style="background-color:rgb(85, 110, 133); color: white;">
       <div class="inner">
@@ -119,9 +119,9 @@ $jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
     </div>
   </div>
 
-  <!-- Kotak 7: Data Kampus -->
+  <!-- Kotak 5: Data Kampus -->
   <div class="col-lg-3 col-6">
-    <div class="small-box" style="background-color:rgb(130, 142, 155); color: white;">
+    <div class="small-box" style="background-color:rgb(133, 43, 156); color: white;">
       <div class="inner">
         <h3><?= $jmlh_kampus ?></h3>
         <p>Data Kampus</p>
@@ -129,7 +129,7 @@ $jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
       <div class="icon">
         <i class="nav-icon fas fa-university"></i>
       </div>
-      <a href="Data_kampus.php" class="small-box-footer text-white">
+      <a href="./Pages/Kampus/list.php" class="small-box-footer text-white">
         Lihat <i class="fas fa-arrow-circle-right"></i>
       </a>
     </div>

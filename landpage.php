@@ -1,3 +1,42 @@
+<?php
+
+// Koneksi Database
+include "./config/dbkoneksi.php";
+
+// Ambil data area parkir
+$today = date('Y-m-d');
+$areaQuery = "SELECT * FROM area_parkir";
+$areaResult = $dbh->query($areaQuery);
+
+// Simpan semua area dalam Array
+$areas = [];
+while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
+    // Hitung Kendaraan parkir hari ini untuk setiap acara
+    $area_id = $area['id'];
+    $vehicleQuery = "SELECT COUNT(*) as total FROM transaksi WHERE area_parkir_id = $area_id AND tanggal = '$today'";
+    $vehicleResult = $dbh->query($vehicleQuery);
+    $vehicle = $vehicleResult->fetch(PDO::FETCH_ASSOC);
+
+    $occupied = $vehicle['total'];
+    $capacity = $area['kapasitas'];
+    $remaining = $capacity - $occupied;
+
+    if ($remaining <= 0) {
+        $notification = "Parkiran Penuh";
+    } else{
+        $notification = "Sisa $remaining slot tersedia";
+    }
+
+    $areas[] = [
+        'nama' => $area['nama'],
+        'vehicles_today' => $occupied, // nama field disamakan
+        'notification' => $notification
+    ];
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -32,20 +71,15 @@
     <section id="features" class="py-20 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Fitur Unggulan</h2>
-            <div class="grid md:grid-cols-3 gap-10">
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                    <h3 class="text-xl font-semibold mb-3 text-blue-600">Pencatatan Masuk/Keluar</h3>
-                    <p class="text-gray-600">Mencatat waktu masuk dan keluar kendaraan dengan cepat dan akurat.</p>
+                <div class="grid md:grid-cols-3 gap-10">
+                    <?php foreach ($areas as $area) : ?>
+                        <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+                            <h3 class="text-xl font-semibold mb-3 text-blue-600"><?= htmlspecialchars($area['nama']) ?></h3>
+                            <p class="text-gray-600">Kendaraan parkir hari ini: <?= $area['vehicles_today'] ?></p>
+                            <p class="text-gray-600 mt-2"><?= htmlspecialchars($area['notification']) ?></p>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                    <h3 class="text-xl font-semibold mb-3 text-blue-600">Laporan Harian</h3>
-                    <p class="text-gray-600">Menyediakan laporan harian kendaraan yang parkir di area kampus.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                    <h3 class="text-xl font-semibold mb-3 text-blue-600">Notifikasi Real-time</h3>
-                    <p class="text-gray-600">Mendapatkan pemberitahuan langsung saat parkiran penuh atau kendaraan melebihi batas waktu parkir.</p>
-                </div>
-            </div>
         </div>
     </section>
 
