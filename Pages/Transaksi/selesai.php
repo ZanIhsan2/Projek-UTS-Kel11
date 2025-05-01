@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jam_keluar = $_POST['jam_keluar'];
     $tanggal = date('Y-m-d');
 
-    $stmt = $dbh->prepare("SELECT masuk FROM transaksi WHERE id = ?");
+    $stmt = $dbh->prepare("SELECT mulai FROM transaksi WHERE id = ?");
     $stmt->execute([$id]);
     $data = $stmt->fetch();
 
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $jam_masuk = strtotime($data['masuk']);
+    $jam_masuk = strtotime($data['mulai']);
     $jam_keluar_time = strtotime($jam_keluar);
 
     $durasi = ($jam_keluar_time - $jam_masuk) / 3600; // durasi jam
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $biaya += ($durasi - 3) * 2000; // denda per jam lewat 3 jam
     }
 
-    $stmt = $dbh->prepare("UPDATE transaksi SET keluar = ?, keterangan = 'Selesai', biaya = ? WHERE id = ?");
+    $stmt = $dbh->prepare("UPDATE transaksi SET akhir = ?, keterangan = 'Selesai', biaya = ? WHERE id = ?");
     $stmt->execute([$jam_keluar, $biaya, $id]);
 
     $_SESSION['notif'] = "Transaksi berhasil diselesaikan. Biaya: Rp" . number_format($biaya,0,",",".");

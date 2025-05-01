@@ -5,6 +5,7 @@ date_default_timezone_set('Asia/Jakarta');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nopol = $_POST['nopol'];
     $jenis_kendaraan = $_POST['jenis_kendaraan'];
+    $area_parkir_id = $_POST['area_parkir_id'];
     $jam_masuk = $_POST['jam_masuk'];
     $tanggal = date('Y-m-d');
 
@@ -15,24 +16,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($kendaraan) {
         $kendaraan_id = $kendaraan['id'];
     } else {
-        $jenis_id = ($jenis_kendaraan == 'motor') ? 1 : (($jenis_kendaraan == 'mobil') ? 2 : 3);
+        $stmt = $dbh->prepare("SELECT id FROM jenis WHERE nama = ?");
+        $stmt->execute([$jenis_kendaraan]);
+        $jenisRow = $stmt->fetch();
+        if (!$jenisRow) {
+            die("Jenis kendaraan tidak valid.");
+        }
+        $jenis_id = $jenisRow['id'];
 
-        $stmt = $dbh->prepare("INSERT INTO kendaraan (merk, pemilik, nopol, thn_beli, deskripsi, jenis_kendaraan_id) 
+        $stmt = $dbh->prepare("INSERT INTO kendaraan (merk, pemilik, nopol, tahun_beli, deskripsi, jenis_kendaraan_id) 
                                VALUES ('-', '-', ?, 0, '-', ?)");
         $stmt->execute([$nopol, $jenis_id]);
         $kendaraan_id = $dbh->lastInsertId();
     }
 
-    $stmt = $dbh->query("SELECT id FROM area_parkir LIMIT 1");
-    $area = $stmt->fetch();
-    if ($area) {
-        $area_parkir_id = $area['id'];
-    } else {
-        die('Tidak ada area parkir tersedia.');
-    }
-
-
-    $stmt = $dbh->prepare("INSERT INTO transaksi (tanggal, masuk, keluar, keterangan, biaya, kendaraan_id, area_parkir_id) 
+    $stmt = $dbh->prepare("INSERT INTO transaksi (tanggal, mulai, akhir, keterangan, biaya, kendaraan_id, area_parkir_id) 
                            VALUES (?, ?, NULL, 'Belum Selesai', 0, ?, ?)");
     $stmt->execute([$tanggal, $jam_masuk, $kendaraan_id, $area_parkir_id]);
 
@@ -49,6 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="alert alert-success"><?= $_SESSION['notif']; unset($_SESSION['notif']); ?></div>
 <?php endif; ?>
 
+<?php
+$stmtArea = $dbh->query("SELECT id, nama FROM area_parkir");
+$areaList = $stmtArea->fetchAll();
+?>
+
 <form method="POST">
 
     <div>
@@ -62,14 +65,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="mb-3">
         <label>Jenis Kendaraan</label>
         <select name="jenis_kendaraan" class="form-control" required>
-            <option value="mobil">Mobil</option>
-            <option value="sepeda motor">Sepeda Motor</option>
-            <option value="sepeda">Sepeda</option>
+            <option value="Mobil">Mobil</option>
+            <option value="Motor">Sepeda Motor</option>
+            <option value="Sepeda">Sepeda</option>
         </select>
     </div>
     <div class="mb-3">
         <label>Jam Masuk</label>
         <input type="time" name="jam_masuk" class="form-control" required>
     </div>
+
+    <div class="mb-3">
+        <label>Area Parkir</label>
+            <select name="area_parkir_id" class="form-control" required>
+                <option value="">-- Pilih Area --</option>
+            <?php foreach ($areaList as $area): ?>
+                <option value="<?= $area['id'] ?>"><?= htmlspecialchars($area['nama']) ?></option>
+            <?php endforeach; ?>
+            </select>
+    </div>
+
     <button type="submit" class="btn btn-primary">Simpan</button>
 </form>

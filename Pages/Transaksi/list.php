@@ -3,9 +3,10 @@ include "../../config/dbkoneksi.php";
 date_default_timezone_set('Asia/Jakarta');
 
 $stmt = $dbh->query('
-    SELECT transaksi.*, kendaraan.nopol, kendaraan.jenis_kendaraan_id, biaya 
+    SELECT transaksi.*, kendaraan.nopol, kendaraan.jenis_kendaraan_id, biaya, area_parkir.nama AS nama 
     FROM transaksi 
     JOIN kendaraan ON transaksi.kendaraan_id = kendaraan.id 
+    JOIN area_parkir ON transaksi.area_parkir_id = area_parkir.id
     ORDER BY transaksi.id DESC
 ');
 $rs = $stmt->fetchAll();
@@ -30,6 +31,7 @@ function getJenis($jenis_id) {
             <th>Jenis</th>
             <th>Jam Masuk</th>
             <th>Biaya</th>
+            <th>Area Parkir</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -39,7 +41,7 @@ function getJenis($jenis_id) {
             <td><?= $i+1 ?></td>
             <td><?= htmlspecialchars($row['nopol']) ?></td>
             <td><?= getJenis($row['jenis_kendaraan_id']) ?></td>
-            <td><?= $row['masuk'] ?></td>
+            <td><?= $row['mulai'] ?></td>
             <td>
                 <?php 
                     if ($row['biaya'] > 0) {
@@ -49,6 +51,7 @@ function getJenis($jenis_id) {
                     }
                 ?>
             </td>
+            <td><?= htmlspecialchars($row['nama'])?></td>
 
             <td>
                 <a href="keluar.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Keluar</a>

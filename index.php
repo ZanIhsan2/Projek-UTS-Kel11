@@ -65,7 +65,7 @@ $jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
       <div class="icon">
         <i class="fas fa-car"></i>
       </div>
-      <a href="data_kendaraan.php" class="small-box-footer">
+      <a href="./Pages/Kendaraan/list.php" class="small-box-footer">
         Lihat <i class="fas fa-arrow-circle-right"></i>
       </a>
     </div>
@@ -81,7 +81,7 @@ $jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
       <div class="icon">
         <i class="nav-icon fas fa-th-list"></i>
       </div>
-      <a href="Jenis_Kendaraan.php" class="small-box-footer">
+      <a href="#" class="small-box-footer">
         Lihat <i class="fas fa-arrow-circle-right"></i>
       </a>
     </div>

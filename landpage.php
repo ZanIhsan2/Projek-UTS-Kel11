@@ -3,8 +3,10 @@
 // Koneksi Database
 include "./config/dbkoneksi.php";
 
-// Ambil data area parkir
+// Tanggal Hari ini (Live)
 $today = date('Y-m-d');
+
+// Query
 $areaQuery = "SELECT * FROM area_parkir";
 $areaResult = $dbh->query($areaQuery);
 
@@ -23,14 +25,20 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
 
     if ($remaining <= 0) {
         $notification = "Parkiran Penuh";
-    } else{
+        $warna = "bg-red-100 border border-red-400";
+    } elseif ($remaining <= 10) {
         $notification = "Sisa $remaining slot tersedia";
-    }
+        $warna = "bg-yellow-100 border border-yellow-400";
+    } else {
+        $notification = "Sisa $remaining slot tersedia";
+        $warna = "bg-blue-100 border border-blue-400";
+    }    
 
     $areas[] = [
         'nama' => $area['nama'],
         'vehicles_today' => $occupied, // nama field disamakan
-        'notification' => $notification
+        'notification' => $notification,
+        'warna' => $warna
     ];
 }
 
@@ -73,7 +81,7 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Fitur Unggulan</h2>
                 <div class="grid md:grid-cols-3 gap-10">
                     <?php foreach ($areas as $area) : ?>
-                        <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+                        <div class="<?= $area['warna'] ?> p-6 rounded-lg shadow-lg hover:shadow-xl transition">
                             <h3 class="text-xl font-semibold mb-3 text-blue-600"><?= htmlspecialchars($area['nama']) ?></h3>
                             <p class="text-gray-600">Kendaraan parkir hari ini: <?= $area['vehicles_today'] ?></p>
                             <p class="text-gray-600 mt-2"><?= htmlspecialchars($area['notification']) ?></p>
