@@ -76,20 +76,43 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Fitur Unggulan</h2>
-                <div class="grid md:grid-cols-3 gap-10">
-                    <?php foreach ($areas as $area) : ?>
-                        <div class="<?= $area['warna'] ?> p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                            <h3 class="text-xl font-semibold mb-3 text-blue-600"><?= htmlspecialchars($area['nama']) ?></h3>
-                            <p class="text-gray-600">Kendaraan parkir hari ini: <?= $area['vehicles_today'] ?></p>
-                            <p class="text-gray-600 mt-2"><?= htmlspecialchars($area['notification']) ?></p>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+    <section id="features" class="py-20 bg-gray-100 relative">
+    <div class="max-w-7xl mx-auto px-4 relative">
+        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Fitur Unggulan</h2>
+        
+        <!-- Kontainer tombol di luar slider -->
+        <button id="prevBtn" class="absolute -left-6 top-[60%] transform -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full shadow-lg z-20 hover:bg-blue-700">
+            &#10094;
+        </button>
+
+        <button id="nextBtn" class="absolute -right-6 top-[60%] transform -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full shadow-lg z-20 hover:bg-blue-700">
+            &#10095;
+        </button>
+
+        <!-- Slider -->
+        <div id="slider" class="overflow-x-auto scroll-smooth no-scrollbar">
+            <div class="flex space-x-6 min-w-max">
+                <?php foreach ($areas as $area) : ?>
+                    <div class="<?= $area['warna'] ?> flex-shrink-0 w-80 p-6 rounded-lg shadow-lg hover:shadow-xl transition">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600"><?= htmlspecialchars($area['nama']) ?></h3>
+                        <p class="text-gray-600">Kendaraan parkir hari ini: <?= $area['vehicles_today'] ?></p>
+                        <p class="text-gray-600 mt-2"><?= htmlspecialchars($area['notification']) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
 
     <!-- Login Section -->
     <!-- <section id="login" class="py-20 bg-white">
@@ -109,6 +132,20 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
             <p id="loginMessage" class="text-center mt-4 text-red-500 hidden">Username atau Password salah!</p>
         </div>
     </section> -->
+
+    <script>
+  const slider = document.getElementById('slider');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  prevBtn.addEventListener('click', () => {
+    slider.scrollBy({ left: -300, behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    slider.scrollBy({ left: 300, behavior: 'smooth' });
+  });
+</script>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white text-center py-6">

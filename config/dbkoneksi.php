@@ -2,7 +2,7 @@
 session_start();
 
 $host = 'localhost';
-$db = 'area_parkir';
+$db = 'parkir_kampus';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
