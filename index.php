@@ -7,6 +7,11 @@ require_once './Layouts/top.php';
 require_once './Layouts/navbar.php';
 require_once './Layouts/sidebar.php';
 
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+    header('Location: login.php');
+    exit;
+}
+
 // Ambil data total statistik untuk menampilkan jumlah
 $jmlh_transaksi = $dbh->query("SELECT COUNT(*) FROM transaksi")-> fetchColumn();
 $jmlh_kampus = $dbh->query("SELECT COUNT(*) FROM kampus")-> fetchColumn();
