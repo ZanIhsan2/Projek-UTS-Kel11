@@ -3,7 +3,7 @@
 // Koneksi Database
 include "../../config/dbkoneksi.php";
 
-// Mengambil data dari Database
+// Mengambil data dari Table Database
 $sql = "SELECT * FROM kampus";
 $rs = $dbh->query($sql);
 
@@ -25,6 +25,7 @@ $rs = $dbh->query($sql);
                 <th>Lokasi</th>
                 <th>latitude</th>
                 <th>longitude</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>

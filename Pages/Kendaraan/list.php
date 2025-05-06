@@ -15,7 +15,7 @@ $rs = $dbh->query($sql);
  <div>
     <div>
         <h1>Daftar Kendaraan</h1>
-        <a href="form.php">+ Kampus</a>
+        <a href="form.php">+ Kendaraan</a>
         <a href="../../index.php"><- Kembali ke Beranda</a>
     </div>
 
@@ -29,6 +29,7 @@ $rs = $dbh->query($sql);
                 <th>Tahun Beli</th>
                 <th>Deskripsi</th>
                 <th>Jenis</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
