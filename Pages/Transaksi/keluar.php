@@ -17,7 +17,6 @@ if (!$data) {
 
 <h1>Parkiran Management</h1>
 <h3>Konfirmasi Keluar Kendaraan</h3>
-
 <form method="POST" action="selesai.php">
     <input type="hidden" name="id" value="<?= $data['id'] ?>">
     <div class="mb-3">

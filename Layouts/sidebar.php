@@ -21,67 +21,50 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-car"></i>
-              <p>
-                Dashboard
-                <span class="right badge badge-danger">New</span>
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="./data_Kendaraan.php" class="nav-link">
-              <i class="nav-icon fas fa-th-list"></i>
-              <p>
-                Jenis Kendaraan
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./Tambah_Kendaraan.php" class="nav-link">
-              <i class="nnav-icon fas fa-plus-circle"></i>
-              <p>
-                Tambah Kendaraan
-              </p>
-            </a>
-          </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-car-side"></i>
-              <p>
-                Kendaraan
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="Pages/Transaksi/list.php" class="nav-link">
-              <i class="nav-icon fas fa-exchange-alt"></i>
-              <p>
-                 Transaksi Parkir
-              </p>
-            </a>
-          </li>         
-          <li class="nav-item">
-            <a href="./Tambah_Area_Parkir.php" class="nav-link">
-              <i class="nav-icon fas fa-map-marker-alt"></i>
-              <p>
-                Area Parkir
-              </p>
-            </a>
-          </li>           
-          <li class="nav-item">
-            <a href="Pages/Kampus/list.php" class="nav-link">
-              <i class="nav-icon fas fa-university"></i>
-              <p>
-                 Data Kampus                                                      
-              </p>
-            </a>
-          </li>         
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-car"></i>
+                <p>
+                  Kendaraan
+                  <span class="right badge badge-danger">New</span>
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="./Pages/Kendaraan/list.php" class="nav-link">
+                    <i class="fas fa-list nav-icon"></i>
+                    <p>Data Kendaraan</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="./Pages/Jenis/list_jenis.php" class="nav-link">
+                    <i class="fas fa-tags nav-icon"></i>
+                    <p>Jenis Kendaraan</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="./Pages/Area_Parkir/list_area.php" class="nav-link">
+                <i class="nav-icon fas fa-parking"></i>
+                <p>
+                  Area Parkir
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./Pages/Transaksi/list.php" class="nav-link">
+                <i class="nav-icon fas fa-exchange-alt"></i>
+                <p>Transaksi Parkir</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="./Pages/Kampus/list.php" class="nav-link">
+                <i class="nav-icon fas fa-university"></i>
+                <p>Data Kampus</p>
+              </a>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu --> 
