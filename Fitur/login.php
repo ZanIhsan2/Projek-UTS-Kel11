@@ -1,21 +1,26 @@
 <?php
+session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == 'POST'){
+if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (trim($email) == '' ||trim($password) ==''){
-        echo "input form harus diisi ";
+    if (trim($email) == '' || trim($password) == '') {
+        $error = "Input form harus diisi.";
     } else {
-        if ($email == 'admin' && $password =='admin123') {
-            header('location: ../index.html');
+        if ($email == 'Admin Parkir' && $password == 'admin123') {
+            $_SESSION['username'] = 'Admin Parkir';
+            $_SESSION['role'] = 'admin';
+            header('Location: ../index.php');
+            exit;
         } else {
-            echo 'email atau password salah';
+            $error = 'Email atau password salah.';
         }
     }
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,8 +51,12 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST'){
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Login untuk akses Parkir</p>
+        <?php if (isset($error)): ?>
+      <div class="alert alert-danger"><?= $error ?></div>
+        <?php endif; ?>
 
-      <form action="../index.php" method="post">
+
+      <form action="" method="POST">
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="email" placeholder="Username">
           <div class="input-group-append">

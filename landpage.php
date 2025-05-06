@@ -114,26 +114,9 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
   }
 </style>
 
-    <!-- Login Section -->
-    <!-- <section id="login" class="py-20 bg-white">
-        <div class="max-w-md mx-auto bg-gray-100 p-8 rounded-lg shadow-lg">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Login ke Akun Anda</h2>
-            <form id="loginForm">
-                <div class="mb-4">
-                    <label class="block text-gray-700 mb-2" for="username">Username</label>
-                    <input type="text" id="username" class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-                </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2" for="password">Password</label>
-                    <input type="password" id="password" class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-                </div>
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Login</button>
-            </form>
-            <p id="loginMessage" class="text-center mt-4 text-red-500 hidden">Username atau Password salah!</p>
-        </div>
-    </section> -->
 
-    <script>
+
+<script>
   const slider = document.getElementById('slider');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
@@ -148,45 +131,61 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
 </script>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center py-6">
-        <p>&copy; 2025 Sistem Informasi Parkir Kampus. All rights reserved.</p>
-    </footer>
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container my-5">
 
-    <!-- JavaScript untuk Login -->
-    <script>
-        const loginForm = document.getElementById('loginForm');
-        const loginMessage = document.getElementById('loginMessage');
-    
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Dummy data user
-            const users = [
-                { username: "admin", password: "1234", role: "admin" },
-                { username: "user", password: "5678", role: "user" }
-            ];
-    
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-    
-            // Cek apakah username dan password cocok
-            const foundUser = users.find(user => user.username === username && user.password === password);
-    
-            if (foundUser) {
-                if (foundUser.role === "admin") {
-                    alert("Login Admin Berhasil!");
-                    window.location.href = "dashboard.html"; // Redirect ke dashboard admin
-                } else {
-                    alert("Login User Berhasil! Anda tetap di halaman ini.");
-                    document.getElementById('loginForm').reset();
-                    loginMessage.classList.add('hidden');
-                }
-            } else {
-                loginMessage.classList.remove('hidden');
-            }
-        });
-    </script>
-    
+<!-- Footer -->
+<!-- Footer -->
+<footer class="bg-gray-900 text-white mt-20">
+  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <!-- Company Info -->
+    <div>
+      <h6 class="uppercase font-bold mb-4">Parkir Kampus</h6>
+      <p class="text-gray-400 text-sm">
+        Sistem informasi parkir kampus STT Nurul Fikri yang memudahkan pengelolaan parkir secara efisien dan aman.
+      </p>
+    </div>
 
+    <!-- Produk -->
+    <div>
+      <h6 class="uppercase font-bold mb-4">Produk</h6>
+      <ul class="space-y-2 text-sm text-gray-400">
+        <li><a href="#" class="hover:underline">Dashboard Admin</a></li>
+        <li><a href="#" class="hover:underline">Manajemen Parkir</a></li>
+        <li><a href="#" class="hover:underline">Laporan Transaksi</a></li>
+        <li><a href="#" class="hover:underline">Integrasi Kampus</a></li>
+      </ul>
+    </div>
+
+    <!-- Tautan Berguna -->
+    <div>
+      <h6 class="uppercase font-bold mb-4">Tautan Berguna</h6>
+      <ul class="space-y-2 text-sm text-gray-400">
+        <li><a href="#" class="hover:underline">Akun Anda</a></li>
+        <li><a href="#" class="hover:underline">Bantuan</a></li>
+        <li><a href="#" class="hover:underline">Syarat & Ketentuan</a></li>
+        <li><a href="#" class="hover:underline">Kebijakan Privasi</a></li>
+      </ul>
+    </div>
+
+    <!-- Kontak -->
+    <div>
+      <h6 class="uppercase font-bold mb-4">Kontak</h6>
+      <ul class="space-y-2 text-sm text-gray-400">
+        <li><i class="fas fa-map-marker-alt mr-2"></i> Depok, Jawa Barat</li>
+        <li><i class="fas fa-envelope mr-2"></i> info@sttnf.ac.id</li>
+        <li><i class="fas fa-phone mr-2"></i> +62 812 3456 7890</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="text-center text-sm py-4 bg-gray-800 text-gray-400">
+    &copy; <?= date('Y') ?> Parkir Kampus STT Nurul Fikri. All rights reserved.
+  </div>
+</footer>
+<!-- Footer -->
+
+</div>
+<!-- End of .container -->
 </body>
 </html>

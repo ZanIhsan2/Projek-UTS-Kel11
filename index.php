@@ -7,12 +7,26 @@ require_once './Layouts/top.php';
 require_once './Layouts/navbar.php';
 require_once './Layouts/sidebar.php';
 
+<<<<<<< HEAD
 // Ambil data jumlah dari masing-masing tabel
 $jmlh_transaksi = $dbh->query("SELECT COUNT(*) FROM transaksi")->fetchColumn();
 $jmlh_kampus = $dbh->query("SELECT COUNT(*) FROM kampus")->fetchColumn();
 $jmlh_parkir = $dbh->query("SELECT COUNT(*) FROM area_parkir")->fetchColumn();
 $jmlh_kendaraan = $dbh->query("SELECT COUNT(*) FROM kendaraan")->fetchColumn();
 $jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")->fetchColumn();
+=======
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+    header('Location: login.php');
+    exit;
+}
+
+// Ambil data total statistik untuk menampilkan jumlah
+$jmlh_transaksi = $dbh->query("SELECT COUNT(*) FROM transaksi")-> fetchColumn();
+$jmlh_kampus = $dbh->query("SELECT COUNT(*) FROM kampus")-> fetchColumn();
+$jmlh_parkir = $dbh->query("SELECT COUNT(*) FROM area_parkir")-> fetchColumn();
+$jmlh_kendaraan = $dbh->query("SELECT COUNT(*) FROM kendaraan")-> fetchColumn();
+$jmlh_jenis = $dbh->query("SELECT COUNT(*) FROM jenis")-> fetchColumn();
+>>>>>>> 2984e2b6d718f657fbaca3f178b1190bff1b62be
 ?>
 
 <style>
