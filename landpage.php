@@ -114,6 +114,67 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
   }
 </style>
 
+<!-- <script>
+    const slider = document.getElementById("slider");
+    const cardWidth = 320; // estimasi lebar tiap card (w-80 = 320px)
+
+    let scrollInterval = setInterval(() => {
+        // Scroll maju
+        slider.scrollBy({
+            left: cardWidth,
+            behavior: "smooth"
+        });
+
+        // Jika sudah di akhir, kembali ke awal
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
+            setTimeout(() => {
+                slider.scrollTo({ left: 0, behavior: "smooth" });
+            }, 3000);
+        }
+    }, 3000);
+</script> -->
+
+<script>
+    const slider = document.getElementById("slider");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let scrollAmount = 0;
+    const scrollStep = 320; // ubah sesuai lebar 1 card
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+
+    function slideNext() {
+        if (scrollAmount < maxScroll) {
+            scrollAmount += scrollStep;
+        } else {
+            scrollAmount = 0; // kembali ke awal
+        }
+        slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+    }
+
+    function slidePrev() {
+        if (scrollAmount > 0) {
+            scrollAmount -= scrollStep;
+        } else {
+            scrollAmount = maxScroll; // ke ujung kanan
+        }
+        slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+    }
+
+    nextBtn.addEventListener("click", () => {
+        slideNext();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        slidePrev();
+    });
+
+    // Auto scroll setiap 3 detik
+    setInterval(() => {
+        slideNext();
+    }, 3000);
+</script>
+
 
 
 <script>
