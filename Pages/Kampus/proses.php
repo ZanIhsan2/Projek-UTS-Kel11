@@ -1,37 +1,34 @@
 <?php
 require_once '../../config/dbkoneksi.php';
 
-// Tangkap data dati Form
-$_merk = $_POST['merk'] ?? '';
-$_pemilik = $_POST['pemilik'] ?? '';
-$_nopol = $_POST['nopol'] ?? '';
-$_thn_beli = $_POST['tahun_beli'] ?? '';
-$_deskripsi = $_POST['deskripsi'] ?? '';
-$_jenis = $_POST['jenis_kendaraan_id'] ?? '';
-$_proses = $_POST['proses'] ?? '';
+// Tangkap data dari form
+$id_edit = $_POST['id_edit'] ?? null;
+$nama = $_POST['nama'] ?? '';
+$alamat = $_POST['alamat'] ?? '';
+$latitude = $_POST['latitude'] ?? 0;
+$longtitude = $_POST['longtitude'] ?? 0; // <- perbaiki di sini
+$proses = $_POST['proses'] ?? '';
+$id_hapus = $_GET['hapus'] ?? null;
 
-if ($_proses == "Simpan") {
-    $sql = "INSERT INTO kendaraan (merk, pemilik, nopol, tahun_beli, deskripsi, jenis_kendaraan_id)
-            VALUES (?, ?, ?, ?, ?, ?)";
-    $ar_data = [$_merk, $_pemilik, $_nopol, $_thn_beli, $_deskripsi, $_jenis];
-} elseif ($_proses == "Update") {
-    $id_edit = $_POST['id_edit'] ?? NULL;
-    $sql = "UPDATE kendaraan SET merk=?, pemilik=?, nopol=?, tahun_beli=?, deskripsi=?, jenis_kendaraan_id=? WHERE id=?";
-    $ar_data = [$_merk, $_pemilik, $_nopol, $_thn_beli, $_deskripsi, $_jenis, $id_edit];
-} elseif (isset($_GET['hapus']) && isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "DELETE FROM kendaraan WHERE id = ?";
+if ($proses === 'Simpan') {
+    // Proses INSERT
+    $sql = "INSERT INTO kampus (nama, alamat, latitude, longtitude) VALUES (?, ?, ?, ?)";
     $stmt = $dbh->prepare($sql);
-    $stmt->execute([$id]);
-    header("Location: list.php");
-    exit;
-} else {
-    die("Proses tidak diketahui.");
+    $stmt->execute([$nama, $alamat, $latitude, $longtitude]);
+
+} elseif ($proses === 'Update' && $id_edit) {
+    // Proses UPDATE
+    $sql = "UPDATE kampus SET nama = ?, alamat = ?, latitude = ?, longtitude = ? WHERE id = ?";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([$nama, $alamat, $latitude, $longtitude, $id_edit]);
+
+} elseif ($id_hapus) {
+    // Proses DELETE
+    $sql = "DELETE FROM kampus WHERE id = ?";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([$id_hapus]);
 }
 
-// Jalankan query
-$stmt = $dbh->prepare($sql);
-$stmt->execute($ar_data);
-
-// Redirect ke index
-header("Location: list.php");
+// Redirect kembali ke halaman list
+header('Location: list.php');
+exit;
