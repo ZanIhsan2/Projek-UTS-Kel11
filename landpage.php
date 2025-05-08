@@ -25,33 +25,39 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
 
     if ($remaining <= 0) {
         $notification = "Parkiran Penuh";
-        $warna = "bg-red-100 border border-red-400";
+        $warna = "bg-red-200 border border-red-400";
     } elseif ($remaining <= 10) {
         $notification = "Sisa $remaining slot tersedia";
-        $warna = "bg-yellow-100 border border-yellow-400";
+        $warna = "bg-yellow-200 border border-yellow-400";
     } else {
         $notification = "Sisa $remaining slot tersedia";
-        $warna = "bg-blue-100 border border-blue-400";
-    }    
+        $warna = "bg-blue-200 border border-blue-400";
+    }
 
     $areas[] = [
         'nama' => $area['nama'],
-        'vehicles_today' => $occupied, // nama field disamakan
+        'vehicles_today' => $occupied,
+        'kapasitas' => $capacity,
         'notification' => $notification,
         'warna' => $warna
     ];
 }
 
+// Logika untuk data Statistik
+$total_area = count($areas);
+$total_kapasitas = array_sum(array_column($areas, 'kapasitas'));
+$total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
 ?>
 
 
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Informasi Parkir Kampus</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
@@ -67,186 +73,219 @@ while ($area = $areaResult->fetch(PDO::FETCH_ASSOC)) {
     </nav>
 
     <!-- Hero Section -->
-    <section class="bg-blue-500 text-white py-20">
+    <section class="bg-blue-500 text-white py-12 md:py-20">
         <div class="max-w-7xl mx-auto text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Selamat Datang di Sistem Informasi Parkir Kampus STT Nurul Fikri</h1>
-            <p class="text-lg md:text-xl mb-8">Kelola parkir lebih mudah, agit man, dan efisien</p>
+            <p class="text-lg md:text-xl mb-8">Sistem pintar untuk manajemen parkir kampus yang efisien dan aman</p>
             <a href="./Fitur/login.php" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">Login Sekarang</a>
         </div>
     </section>
 
     <!-- Features Section -->
     <section id="features" class="py-20 bg-gray-100 relative">
-    <div class="max-w-7xl mx-auto px-4 relative">
-        <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Fitur Unggulan</h2>
-        
-        <!-- Kontainer tombol di luar slider -->
-        <button id="prevBtn" class="absolute -left-6 top-[60%] transform -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full shadow-lg z-20 hover:bg-blue-700">
-            &#10094;
-        </button>
+        <div class="max-w-7xl mx-auto px-4 relative">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Informasi Area Parkir</h2>
 
-        <button id="nextBtn" class="absolute -right-6 top-[60%] transform -translate-y-1/2 bg-blue-600 text-white p-3 rounded-full shadow-lg z-20 hover:bg-blue-700">
-            &#10095;
-        </button>
+            <!-- Input pencarian -->
+            <div class="mb-6 flex justify-center">
+                <input type="text" id="searchArea" placeholder="Cari area parkir..." class="px-4 py-2 border border-gray-300 rounded w-full md:w-1/3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+            </div>
 
-        <!-- Slider -->
-        <div id="slider" class="overflow-x-auto scroll-smooth no-scrollbar">
-            <div class="flex space-x-6 min-w-max">
-                <?php foreach ($areas as $area) : ?>
-                    <div class="<?= $area['warna'] ?> flex-shrink-0 w-80 p-6 rounded-lg shadow-lg hover:shadow-xl transition">
-                        <h3 class="text-xl font-semibold mb-3 text-blue-600"><?= htmlspecialchars($area['nama']) ?></h3>
-                        <p class="text-gray-600">Kendaraan parkir hari ini: <?= $area['vehicles_today'] ?></p>
-                        <p class="text-gray-600 mt-2"><?= htmlspecialchars($area['notification']) ?></p>
-                    </div>
-                <?php endforeach; ?>
+            <!-- Statistik Ringkas -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-center text-gray-800">
+              <div class="bg-white shadow rounded-lg p-5">
+                <h4 class="text-lg font-semibold">Total Area</h4>
+                <p class="text-2xl font-bold text-blue-600"><?= $total_area ?></p>
+              </div>
+              <div class="bg-white shadow rounded-lg p-5">
+                <h4 class="text-lg font-semibold">Total Kapasitas</h4>
+                <p class="text-2xl font-bold text-green-600"><?= $total_kapasitas ?></p>
+              </div>
+              <div class="bg-white shadow rounded-lg p-5">
+                <h4 class="text-lg font-semibold">Kendaraan Hari Ini</h4>
+                <p class="text-2xl font-bold text-red-600"><?= $total_kendaraan ?></p>
+              </div>
+            </div>
+
+            <!-- Filter Kapasitas Area Parkir -->
+            <div class="mb-6 flex justify-center">
+              <select id="statusFilter" class="px-4 py-2 border border-gray-300 rounded w-full md:w-1/3 shadow-sm">
+                <option value="">Semua Status</option>
+                <option value="Tersedia">Tersedia</option>
+                <option value="Hampir Penuh">Hampir Penuh</option>
+                <option value="Penuh">Penuh</option>
+              </select>
+            </div>
+
+            <!-- Legend -->
+            <div class="flex justify-center gap-6 mb-6 text-sm">
+              <span class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-blue-500"></span> Tersedia
+              </span>
+              <span class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-yellow-500"></span> Hampir Penuh
+              </span>
+              <span class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-500"></span> Penuh
+              </span>
+            </div>
+
+            <style>
+              .no-scrollbar::-webkit-scrollbar {
+                  display: none;
+              }
+              .no-scrollbar {
+                  -ms-overflow-style: none;
+                  scrollbar-width: none;
+              }
+            </style>
+
+            <div id="sliderWrapper" class="relative">
+            <!-- Tombol di kiri dan kanan slider -->
+              <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700">
+                &#10094;
+              </button>
+              <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700">
+                &#10095;
+              </button>
+      
+            <!-- Slider -->
+            <div id="slider" class="overflow-x-auto scroll-smooth no-scrollbar">
+                <div id="areaCards" class="flex space-x-6 min-w-max">
+                    <!-- Data akan muncul (Refresh) menggunakan JavaScript -->
+                </div>
+            </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<style>
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-</style>
+    <!-- JavaScript -->
 
-<!-- <script>
-    const slider = document.getElementById("slider");
-    const cardWidth = 320; // estimasi lebar tiap card (w-80 = 320px)
+    <!-- Slider Script -->
+    <script>
+      function initSlider() {
+          const slider = document.getElementById("slider");
+          const prevBtn = document.getElementById("prevBtn");
+          const nextBtn = document.getElementById("nextBtn");
 
-    let scrollInterval = setInterval(() => {
-        // Scroll maju
-        slider.scrollBy({
-            left: cardWidth,
-            behavior: "smooth"
+          let scrollAmount = 0;
+          const scrollStep = 320;
+          const maxScroll = () => slider.scrollWidth - slider.clientWidth;
+
+          function slideNext() {
+              scrollAmount = (scrollAmount < maxScroll()) ? scrollAmount + scrollStep : 0;
+              slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+          }
+
+          function slidePrev() {
+              scrollAmount = (scrollAmount > 0) ? scrollAmount - scrollStep : maxScroll();
+              slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+          }
+
+          nextBtn.addEventListener("click", slideNext);
+          prevBtn.addEventListener("click", slidePrev);
+
+          setInterval(slideNext, 3500);
+      }
+    </script>
+
+
+    <!-- Pencarian -->
+    <script>
+        const searchInput = document.getElementById('searchArea');
+        searchInput.addEventListener('keyup', function () {
+            const keyword = this.value.toLowerCase();
+            const cards = document.querySelectorAll('#slider .flex > div');
+            cards.forEach(card => {
+                const nama = card.querySelector('h3').innerText.toLowerCase();
+                card.style.display = nama.includes(keyword) ? 'block' : 'none';
+            });
         });
+    </script>
 
-        // Jika sudah di akhir, kembali ke awal
-        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth) {
-            setTimeout(() => {
-                slider.scrollTo({ left: 0, behavior: "smooth" });
-            }, 3000);
+    <!-- Filter Area Parkir -->
+    <script>
+          document.getElementById('statusFilter').addEventListener('change', function () {
+            const selectedStatus = this.value.toLowerCase();
+            const cards = document.querySelectorAll('#slider .flex > div');
+            cards.forEach(card => {
+            const badge = card.querySelector('span').innerText.toLowerCase();
+              if (!selectedStatus || badge.includes(selectedStatus)) {
+                card.style.display = 'block';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+    </script>
+
+    <!-- Refres Data -->
+    <script>
+        async function fetchAreaData() {
+          try {
+            const res = await fetch('data.php'); // ⬅️ Panggil file baru ini
+            const html = await res.text();
+            document.getElementById('areaCards').innerHTML = html;
+          } catch (err) {
+            console.error('Gagal mengambil data area:', err);
+          }
         }
-    }, 3000);
-</script> -->
 
-<script>
-    const slider = document.getElementById("slider");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
+        // Panggil pertama kali
+        fetchAreaData();
 
-    let scrollAmount = 0;
-    const scrollStep = 320; // ubah sesuai lebar 1 card
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
+        // Lalu refresh otomatis setiap 60 detik
+        setInterval(fetchAreaData, 60000);
 
-    function slideNext() {
-        if (scrollAmount < maxScroll) {
-            scrollAmount += scrollStep;
-        } else {
-            scrollAmount = 0; // kembali ke awal
+        function fetchAreaData() {
+          fetch('data.php')
+            .then(response => response.text())
+            .then(html => {
+            document.getElementById('areaCards').innerHTML = html;
+          initSlider(); // <-- aktifkan slider ulang
+          });
         }
-        slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
-    }
-
-    function slidePrev() {
-        if (scrollAmount > 0) {
-            scrollAmount -= scrollStep;
-        } else {
-            scrollAmount = maxScroll; // ke ujung kanan
-        }
-        slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
-    }
-
-    nextBtn.addEventListener("click", () => {
-        slideNext();
-    });
-
-    prevBtn.addEventListener("click", () => {
-        slidePrev();
-    });
-
-    // Auto scroll setiap 3 detik
-    setInterval(() => {
-        slideNext();
-    }, 3000);
-</script>
-
-
-
-<script>
-  const slider = document.getElementById('slider');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-
-  prevBtn.addEventListener('click', () => {
-    slider.scrollBy({ left: -300, behavior: 'smooth' });
-  });
-
-  nextBtn.addEventListener('click', () => {
-    slider.scrollBy({ left: 300, behavior: 'smooth' });
-  });
-</script>
+    </script>
 
     <!-- Footer -->
-    <!-- Remove the container if you want to extend the Footer to full width. -->
-<div class="container my-5">
-
-<!-- Footer -->
-<!-- Footer -->
-<footer class="bg-gray-900 text-white mt-20">
-  <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
-    <!-- Company Info -->
-    <div>
-      <h6 class="uppercase font-bold mb-4">Parkir Kampus</h6>
-      <p class="text-gray-400 text-sm">
-        Sistem informasi parkir kampus STT Nurul Fikri yang memudahkan pengelolaan parkir secara efisien dan aman.
-      </p>
-    </div>
-
-    <!-- Produk -->
-    <div>
-      <h6 class="uppercase font-bold mb-4">Produk</h6>
-      <ul class="space-y-2 text-sm text-gray-400">
-        <li><a href="#" class="hover:underline">Dashboard Admin</a></li>
-        <li><a href="#" class="hover:underline">Manajemen Parkir</a></li>
-        <li><a href="#" class="hover:underline">Laporan Transaksi</a></li>
-        <li><a href="#" class="hover:underline">Integrasi Kampus</a></li>
-      </ul>
-    </div>
-
-    <!-- Tautan Berguna -->
-    <div>
-      <h6 class="uppercase font-bold mb-4">Tautan Berguna</h6>
-      <ul class="space-y-2 text-sm text-gray-400">
-        <li><a href="#" class="hover:underline">Akun Anda</a></li>
-        <li><a href="#" class="hover:underline">Bantuan</a></li>
-        <li><a href="#" class="hover:underline">Syarat & Ketentuan</a></li>
-        <li><a href="#" class="hover:underline">Kebijakan Privasi</a></li>
-      </ul>
-    </div>
-
-    <!-- Kontak -->
-    <div>
-      <h6 class="uppercase font-bold mb-4">Kontak</h6>
-      <ul class="space-y-2 text-sm text-gray-400">
-        <li><i class="fas fa-map-marker-alt mr-2"></i> Depok, Jawa Barat</li>
-        <li><i class="fas fa-envelope mr-2"></i> info@sttnf.ac.id</li>
-        <li><i class="fas fa-phone mr-2"></i> +62 812 3456 7890</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="text-center text-sm py-4 bg-gray-800 text-gray-400">
-    &copy; <?= date('Y') ?> Parkir Kampus STT Nurul Fikri. All rights reserved.
-  </div>
-</footer>
-<!-- Footer -->
-
-</div>
-<!-- End of .container -->
+    <footer class="bg-gray-900 text-white mt-20">
+        <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h6 class="uppercase font-bold mb-4">Parkir Kampus</h6>
+                <p class="text-gray-400 text-sm">
+                    Sistem informasi parkir kampus STT Nurul Fikri yang memudahkan pengelolaan parkir secara efisien dan aman.
+                </p>
+            </div>
+            <div>
+                <h6 class="uppercase font-bold mb-4">Produk</h6>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" class="hover:underline">Dashboard Admin</a></li>
+                    <li><a href="#" class="hover:underline">Manajemen Parkir</a></li>
+                    <li><a href="#" class="hover:underline">Laporan Transaksi</a></li>
+                    <li><a href="#" class="hover:underline">Integrasi Kampus</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="uppercase font-bold mb-4">Tautan Berguna</h6>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" class="hover:underline">Akun Anda</a></li>
+                    <li><a href="#" class="hover:underline">Bantuan</a></li>
+                    <li><a href="#" class="hover:underline">Syarat & Ketentuan</a></li>
+                    <li><a href="#" class="hover:underline">Kebijakan Privasi</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="uppercase font-bold mb-4">Kontak</h6>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><i class="fas fa-map-marker-alt mr-2"></i> Depok, Jawa Barat</li>
+                    <li><i class="fas fa-envelope mr-2"></i> info@sttnf.ac.id</li>
+                    <li><i class="fas fa-phone mr-2"></i> +62 821 1662 7234</li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-sm py-4 bg-gray-800 text-gray-400">
+            &copy; <?= date('Y') ?> Parkir Kampus STT Nurul Fikri. All rights reserved.
+        </div>
+    </footer>
 </body>
 </html>
