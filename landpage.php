@@ -62,18 +62,38 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
     <!-- Navbar -->
-    <nav class="bg-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold text-blue-600">Parkir Kampus</div>
-            <div>
-                <a href="./Fitur/login.php" class="text-gray-700 hover:text-blue-500 px-3">Login</a>
-                <a href="#features" class="text-gray-700 hover:text-blue-500 px-3">Fitur</a>
-            </div>
+    <nav class="bg-white/40 backdrop-blur-md shadow-md fixed top-0 w-full h-16 z-50">
+      <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div class="text-xl font-bold text-blue-600">Parkir Kampus</div>
+
+        <!-- Tombol Hamburger -->
+        <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+
+        <!-- Menu Navigasi -->
+        <div id="menu" class="hidden md:flex md:items-center md:space-x-6 absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none px-4 py-4 md:p-0 transition-all duration-300 flex-col md:flex-row space-y-4 md:space-y-0 z-40">
+          
+          <!-- Link Navigasi -->
+          <div class="flex flex-col md:flex-row md:items-center md:space-x-4 w-full md:w-auto">
+            <a href="./Fitur/login.php" class="text-gray-700 hover:text-blue-500">Login</a>
+            <a href="#info" class="text-gray-700 hover:text-blue-500">Informasi</a>
+            <a href="#features" class="text-gray-700 hover:text-blue-500">Fitur</a>
+          </div>
+
+          <!-- Form Pencarian -->
+          <div class="flex flex-col md:flex-row md:items-center md:space-x-2 w-full md:w-auto">
+            <input type="text" id="searchArea" placeholder="Cari area parkir..." class="px-4 py-2 border border-gray-300 rounded w-full md:w-64 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" />
+            <button id="searchBtn" class="flex items-center justify-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition w-full md:w-auto mt-2 md:mt-0">
+              <i class="fas fa-search mr-2"></i>Cari
+            </button>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="bg-blue-500 text-white py-12 md:py-20">
+    <section class="bg-blue-500 text-white pt-20 md:pt-24 pb-12 md:pb-20">
         <div class="max-w-7xl mx-auto text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4">Selamat Datang di Sistem Informasi Parkir Kampus STT Nurul Fikri</h1>
             <p class="text-lg md:text-xl mb-8">Sistem pintar untuk manajemen parkir kampus yang efisien dan aman</p>
@@ -81,31 +101,27 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
         </div>
     </section>
 
+    <h2 id="info" class="py-16 text-3xl font-bold text-center text-gray-800">Informasi Area Parkir</h2>
+
+    <!-- Informasi Singkat Parkiran -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-center text-gray-800 mt-2">
+      <div class="bg-white shadow rounded-lg p-5">
+        <h4 class="text-lg font-semibold">Total Area</h4>
+        <p class="text-2xl font-bold text-blue-600"><?= $total_area ?></p>
+      </div>
+      <div class="bg-white shadow rounded-lg p-5">
+        <h4 class="text-lg font-semibold">Total Kapasitas</h4>
+        <p class="text-2xl font-bold text-green-600"><?= $total_kapasitas ?></p>
+      </div>
+      <div class="bg-white shadow rounded-lg p-5">
+        <h4 class="text-lg font-semibold">Kendaraan Hari Ini</h4>
+        <p class="text-2xl font-bold text-red-600"><?= $total_kendaraan ?></p>
+      </div>
+    </div>
+
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-gray-100 relative">
+    <section id="features" class="py-4 bg-gray-100 relative">
         <div class="max-w-7xl mx-auto px-4 relative">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Informasi Area Parkir</h2>
-
-            <!-- Input pencarian -->
-            <div class="mb-6 flex justify-center">
-                <input type="text" id="searchArea" placeholder="Cari area parkir..." class="px-4 py-2 border border-gray-300 rounded w-full md:w-1/3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
-            </div>
-
-            <!-- Statistik Ringkas -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 text-center text-gray-800">
-              <div class="bg-white shadow rounded-lg p-5">
-                <h4 class="text-lg font-semibold">Total Area</h4>
-                <p class="text-2xl font-bold text-blue-600"><?= $total_area ?></p>
-              </div>
-              <div class="bg-white shadow rounded-lg p-5">
-                <h4 class="text-lg font-semibold">Total Kapasitas</h4>
-                <p class="text-2xl font-bold text-green-600"><?= $total_kapasitas ?></p>
-              </div>
-              <div class="bg-white shadow rounded-lg p-5">
-                <h4 class="text-lg font-semibold">Kendaraan Hari Ini</h4>
-                <p class="text-2xl font-bold text-red-600"><?= $total_kendaraan ?></p>
-              </div>
-            </div>
 
             <!-- Filter Kapasitas Area Parkir -->
             <div class="mb-6 flex justify-center">
@@ -141,82 +157,138 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
             </style>
 
             <div id="sliderWrapper" class="relative">
-            <!-- Tombol di kiri dan kanan slider -->
+              <!-- Slider -->
+              <div id="slider" class="overflow-x-auto scroll-smooth no-scrollbar">
+                <div id="areaCards" class="flex space-x-6 min-w-max">
+                    <!-- Data akan ke Refresh setiap 70 detik -->
+                </div>
+              </div>
+              <!-- Tombol di kiri dan kanan slider -->
               <button id="prevBtn" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700">
                 &#10094;
               </button>
               <button id="nextBtn" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700">
                 &#10095;
               </button>
-      
-            <!-- Slider -->
-            <div id="slider" class="overflow-x-auto scroll-smooth no-scrollbar">
-                <div id="areaCards" class="flex space-x-6 min-w-max">
-                    <!-- Data akan muncul (Refresh) menggunakan JavaScript -->
-                </div>
-            </div>
             </div>
         </div>
     </section>
 
     <!-- JavaScript -->
 
-    <!-- Slider Script -->
+    <!-- Toogle atau Hamburger menu -->
     <script>
-      function initSlider() {
-          const slider = document.getElementById("slider");
-          const prevBtn = document.getElementById("prevBtn");
-          const nextBtn = document.getElementById("nextBtn");
+      document.getElementById("menu-toggle").addEventListener("click", function () {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("hidden");
+      });
+    </script>
 
-          let scrollAmount = 0;
-          const scrollStep = 320;
-          const maxScroll = () => slider.scrollWidth - slider.clientWidth;
+    <!-- Slider -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        function initSlider() {
+            const slider = document.getElementById("slider");
+            const prevBtn = document.getElementById("prevBtn");
+            const nextBtn = document.getElementById("nextBtn");
 
-          function slideNext() {
-              scrollAmount = (scrollAmount < maxScroll()) ? scrollAmount + scrollStep : 0;
-              slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+            // Pastikan elemen-elemen ditemukan
+            if (!slider || !prevBtn || !nextBtn) {
+                console.error("Elemen slider atau tombol tidak ditemukan!");
+                return;
+            }
+
+            let scrollAmount = 0;
+            const scrollStep = 320;
+            const maxScroll = () => slider.scrollWidth - slider.clientWidth;
+
+            function slideNext() {
+                scrollAmount = (scrollAmount < maxScroll()) ? scrollAmount + scrollStep : 0;
+                slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+            }
+
+            function slidePrev() {
+                scrollAmount = (scrollAmount > 0) ? scrollAmount - scrollStep : maxScroll();
+                slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
+            }
+
+            nextBtn.addEventListener("click", slideNext);
+            prevBtn.addEventListener("click", slidePrev);
+
+            // Menjalankan fungsi slideNext secara otomatis setiap 4 detik
+            setInterval(slideNext, 3500);
           }
 
-          function slidePrev() {
-              scrollAmount = (scrollAmount > 0) ? scrollAmount - scrollStep : maxScroll();
-              slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
-          }
-
-          nextBtn.addEventListener("click", slideNext);
-          prevBtn.addEventListener("click", slidePrev);
-
-          setInterval(slideNext, 3500);
-      }
+          initSlider();
+        });
     </script>
 
 
     <!-- Pencarian -->
     <script>
-        const searchInput = document.getElementById('searchArea');
-        searchInput.addEventListener('keyup', function () {
-            const keyword = this.value.toLowerCase();
-            const cards = document.querySelectorAll('#slider .flex > div');
-            cards.forEach(card => {
-                const nama = card.querySelector('h3').innerText.toLowerCase();
-                card.style.display = nama.includes(keyword) ? 'block' : 'none';
-            });
+      const searchInput = document.getElementById('searchArea');
+      const searchBtn = document.getElementById('searchBtn');
+
+      let debounceTimer;
+
+      function filterAndScroll() {
+        const keyword = searchInput.value.toLowerCase();
+        const cards = document.querySelectorAll('#slider .flex > div');
+        let foundMatch = false;
+
+        cards.forEach(card => {
+          const nama = card.querySelector('h3').innerText.toLowerCase();
+          if (nama.includes(keyword)) {
+            card.style.display = 'block';
+            foundMatch = true;
+          } else {
+            card.style.display = 'none';
+          }
         });
+
+        if (foundMatch) {
+          document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      // Debounce saat ngetik
+      searchInput.addEventListener('keyup', function (e) {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          filterAndScroll();
+        }, 1000);
+      });
+
+      // Tekan Enter = langsung cari
+      searchInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          clearTimeout(debounceTimer);
+          filterAndScroll();
+        }
+      });
+
+      // Klik tombol cari = langsung cari
+      searchBtn.addEventListener('click', function () {
+        clearTimeout(debounceTimer);
+        filterAndScroll();
+      });
     </script>
+
 
     <!-- Filter Area Parkir -->
     <script>
-          document.getElementById('statusFilter').addEventListener('change', function () {
-            const selectedStatus = this.value.toLowerCase();
-            const cards = document.querySelectorAll('#slider .flex > div');
-            cards.forEach(card => {
-            const badge = card.querySelector('span').innerText.toLowerCase();
-              if (!selectedStatus || badge.includes(selectedStatus)) {
-                card.style.display = 'block';
-              } else {
-                card.style.display = 'none';
-              }
-            });
-          });
+      document.getElementById('statusFilter').addEventListener('change', function () {
+        const selectedStatus = this.value.toLowerCase();
+        const cards = document.querySelectorAll('#slider .flex > div');
+        cards.forEach(card => {
+          const badge = card.querySelector('span').innerText.toLowerCase();
+          if (!selectedStatus || badge.includes(selectedStatus)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
     </script>
 
     <!-- Refres Data -->
@@ -234,17 +306,8 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
         // Panggil pertama kali
         fetchAreaData();
 
-        // Lalu refresh otomatis setiap 60 detik
-        setInterval(fetchAreaData, 60000);
-
-        function fetchAreaData() {
-          fetch('data.php')
-            .then(response => response.text())
-            .then(html => {
-            document.getElementById('areaCards').innerHTML = html;
-          initSlider(); // <-- aktifkan slider ulang
-          });
-        }
+        // Lalu refresh otomatis setiap 70 detik
+        setInterval(fetchAreaData, 70000);
     </script>
 
     <!-- Footer -->
