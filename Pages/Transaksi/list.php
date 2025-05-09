@@ -184,7 +184,7 @@ function getJenis($jenis_id) {
     <h3>Daftar Kendaraan Parkir Aktif</h3>
     <div class="controls">
         <a href="masuk.php">+ Tambah Kendaraan</a>
-        <a href="../../index.php"><- Kembali Ke Beranda</a>
+        <a href="../../admin.php"><- Kembali Ke Beranda</a>
     </div>
 
     <div class="table-container">
