@@ -76,9 +76,10 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
           
           <!-- Link Navigasi -->
           <div class="flex flex-col md:flex-row md:items-center md:space-x-4 w-full md:w-auto">
-            <a href="./Fitur/login.php" class="text-gray-700 hover:text-blue-500">Login</a>
             <a href="#info" class="text-gray-700 hover:text-blue-500">Informasi</a>
             <a href="#features" class="text-gray-700 hover:text-blue-500">Fitur</a>
+            <a href="#about" class="text-gray-700 hover:text-blue-500">Tentang</a>
+            <a href="./Fitur/login.php" class="text-gray-700 hover:text-blue-500">Login</a>
           </div>
 
           <!-- Form Pencarian -->
@@ -100,6 +101,16 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
             <a href="./Fitur/login.php" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">Login Sekarang</a>
         </div>
     </section>
+
+    <section id="about" class="bg-white pt-20 md:pt-24 pb-12 md:pb-20">
+    <div class="max-w-7xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl mb-12">About</h1>
+        <p class="text-lg md:text-xl mt-12">
+            Sistem Informasi Parkir Kampus adalah platform digital yang dirancang untuk mempermudah pengelolaan dan pemantauan aktivitas parkir di lingkungan kampus. Sistem ini bertujuan untuk menciptakan pengalaman parkir yang tertib, efisien, dan transparan bagi seluruh civitas akademika, termasuk mahasiswa, dosen, dan staf kampus.
+        </p>
+    </div>
+    </section>
+
 
     <h2 id="info" class="py-16 text-3xl font-bold text-center text-gray-800">Informasi Area Parkir</h2>
 
