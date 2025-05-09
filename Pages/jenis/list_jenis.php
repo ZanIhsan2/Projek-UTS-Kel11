@@ -43,7 +43,7 @@ $rs = $dbh->query($sql);
                         <option value="bg-white">Putih</option>
                     </select>
                     <a href="form_jenis.php" class="ml-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">+ Jenis</a>
-                    <a href="../../index.php" class="text-gray-600 hover:underline ml-2">← Beranda</a>
+                    <a href="../../admin.php" class="text-gray-600 hover:underline ml-2">← Beranda</a>
                 </div>
             </div>
             <table class="w-full border border-gray-300 rounded overflow-hidden">

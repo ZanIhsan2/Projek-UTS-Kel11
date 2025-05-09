@@ -25,7 +25,7 @@ $rs = $dbh->query($sql);
         <h1 class="text-2xl font-bold">Daftar Kampus</h1>
         <div class="space-x-2">
             <a href="form.php" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 focus:ring focus:ring-blue-300 focus:outline-none transition duration-300">+ Tambah Kampus</a>
-            <a href="../../index.php" class="text-blue-600 hover:underline focus:outline-none transition duration-300">← Kembali ke Beranda</a>
+            <a href="../../admin.php" class="text-blue-600 hover:underline focus:outline-none transition duration-300">← Kembali ke Beranda</a>
         </div>
     </div>
     <div class="overflow-x-auto bg-white rounded-lg shadow-md">

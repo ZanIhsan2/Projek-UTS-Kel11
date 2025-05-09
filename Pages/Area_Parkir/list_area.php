@@ -117,7 +117,7 @@ $rs = $dbh->query($sql);
                     <h1>Daftar Area Parkir</h1>
                     <div class="action-buttons">
                         <a href="form_area.php" class="btn-tambah">+ Area Parkir</a>
-                        <a href="../../index.php" class="btn-kembali">← Kembali ke Beranda</a>
+                        <a href="../../admin.php" class="btn-kembali">← Kembali ke Beranda</a>
                     </div>
 
                     <table>

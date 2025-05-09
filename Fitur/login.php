@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         if ($email == 'Admin Parkir' && $password == 'admin123') {
             $_SESSION['username'] = 'Admin Parkir';
             $_SESSION['role'] = 'admin';
-            header('Location: ../index.php');
+            header('Location: ../admin.php');
             exit;
         } else {
             $error = 'Email atau password salah.';
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="./index.php"><b>Parkir Kampus</b><br>STT Nurul Fikri</a>
+    <a href="./admin.php"><b>Parkir Kampus</b><br>STT Nurul Fikri</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
