@@ -76,9 +76,9 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
           
           <!-- Link Navigasi -->
           <div class="flex flex-col md:flex-row md:items-center md:space-x-4 w-full md:w-auto">
-            <a href="#info" class="text-gray-700 hover:text-blue-500">Informasi</a>
-            <a href="#features" class="text-gray-700 hover:text-blue-500">Fitur</a>
             <a href="#about" class="text-gray-700 hover:text-blue-500">Tentang</a>
+            <a href="#info" class="text-gray-700 hover:text-blue-500">Informasi</a>
+            <a href="#features" class="text-gray-700 hover:text-blue-500">Parkiran</a>
             <a href="./Fitur/login.php" class="text-gray-700 hover:text-blue-500">Login</a>
           </div>
 
@@ -103,12 +103,42 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
     </section>
 
     <section id="about" class="bg-white pt-20 md:pt-24 pb-12 md:pb-20">
-    <div class="max-w-7xl mx-auto text-center">
-        <h1 class="text-4xl md:text-5xl mb-12">About</h1>
-        <p class="text-lg md:text-xl mt-12">
-            Sistem Informasi Parkir Kampus adalah platform digital yang dirancang untuk mempermudah pengelolaan dan pemantauan aktivitas parkir di lingkungan kampus. Sistem ini bertujuan untuk menciptakan pengalaman parkir yang tertib, efisien, dan transparan bagi seluruh civitas akademika, termasuk mahasiswa, dosen, dan staf kampus.
-        </p>
-    </div>
+      <div class="max-w-7xl mx-auto px-4 md:px-8">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          
+          <!-- Kiri: Teks -->
+          <div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Tentang Sistem</h1>
+            <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+              <strong>Sistem Informasi Parkir Kampus</strong> adalah platform digital yang dirancang untuk mempermudah pengelolaan dan pemantauan aktivitas parkir di lingkungan kampus. Sistem ini bertujuan untuk menciptakan pengalaman parkir yang tertib, efisien, dan transparan bagi seluruh civitas akademika, termasuk mahasiswa, dosen, dan staf kampus.
+            </p>
+          </div>
+
+          <!-- Kanan: 4 Card -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="bg-blue-100 rounded-xl p-4 shadow hover:shadow-lg transition">
+              <h3 class="font-semibold text-lg text-blue-800 mb-2">Monitoring Real-Time</h3>
+              <p class="text-sm text-blue-900">Pantau data parkir secara langsung dari dashboard.</p>
+            </div>
+
+            <div class="bg-green-100 rounded-xl p-4 shadow hover:shadow-lg transition">
+              <h3 class="font-semibold text-lg text-green-800 mb-2">Integrasi Kartu Mahasiswa</h3>
+              <p class="text-sm text-green-900">Mendukung autentikasi masuk dan keluar dengan kartu RFID/NFC.</p>
+            </div>
+
+            <div class="bg-yellow-100 rounded-xl p-4 shadow hover:shadow-lg transition">
+              <h3 class="font-semibold text-lg text-yellow-800 mb-2">Data Historis</h3>
+              <p class="text-sm text-yellow-900">Simpan dan kelola riwayat parkir untuk keperluan audit.</p>
+            </div>
+
+            <div class="bg-red-100 rounded-xl p-4 shadow hover:shadow-lg transition">
+              <h3 class="font-semibold text-lg text-red-800 mb-2">Laporan Otomatis</h3>
+              <p class="text-sm text-red-900">Dapatkan laporan aktivitas parkir mingguan/bulanan.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
 
 
@@ -361,5 +391,6 @@ $total_kendaraan = array_sum(array_column($areas, 'vehicles_today'));
             &copy; <?= date('Y') ?> Parkir Kampus STT Nurul Fikri. All rights reserved.
         </div>
     </footer>
+
 </body>
 </html>
